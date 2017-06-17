@@ -9,5 +9,8 @@
 
 def sum_difference_product
   # your code goes here
-  
+  x, y = gets.split
+  puts x.to_i + y.to_i
+  puts x.to_i - y.to_i
+  puts x.to_i * y.to_i
 end
