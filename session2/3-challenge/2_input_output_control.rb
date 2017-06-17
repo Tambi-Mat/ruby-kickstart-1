@@ -20,11 +20,17 @@
 
 def hi_hi_goodbye
   # your code here
+  while true
+    puts " Please type a number or type bye"
+    number = gets
 
+    if number != "bye"
+      number.to_i.times {print "hi "}
+    break if number == "bye"
+      print "goodbye"
+    end
+  end
 end
-
-
-
 
 # This will just invoke the method if you run this program directly
 # This way you can try it out by running "$ ruby 2_input_output_control.rb"
