@@ -15,3 +15,7 @@
 # prime_chars? ['a', 'bcd']       # => false
 # prime_chars? ['a', 'b', 'cd']   # => false
 
+def prime_chars?(strings)
+  require "prime"
+  Prime.each(strings.size) { |x| x % x == 0 && x / x == 1}
+end
