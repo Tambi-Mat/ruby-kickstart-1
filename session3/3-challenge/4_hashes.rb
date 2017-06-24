@@ -6,3 +6,10 @@
 #
 # first_pos "The dog and the cat and the cow" # => {"The" => 0, "dog" => 1, "and" => 2, "the" => 3, "cat" => 4, "cow" => 7}
 
+def first_pos(string)
+    hash = Hash.new
+    string.split.each_with_index { |word, pos| hash[word] ||= pos }
+    # look up the nuances of each_with_index and ||= methods 
+    hash
+end
+p first_pos("The cat and the mouse do the tango together")
