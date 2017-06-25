@@ -19,3 +19,21 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(t_f, *elements)
+    match = Array.new
+    elements.each_slice 2 do |first, last|
+        # changing truthy and falsey to true and false
+        first = !!first
+        last  = !!last
+
+        # if t_f = true, the opposites are set to true
+        # if t_f = false, the opposites are set to false
+        if t_f
+            result = (first != last)
+        else
+            result = (first == last)
+        end
+        match << result
+    end
+    p match
+end
