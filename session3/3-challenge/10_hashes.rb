@@ -30,5 +30,10 @@
 #
 # create it from scratch :)
 
-
-
+def pathify (path=Hash.new, cwd = "", all_paths=[])
+  path.each do |key,value|
+    pathify(value, cwd + "/" + key,all_paths) if value.is_a? Hash
+    value.map { |e| all_paths << cwd + "/" + key + "/" + e }.to_a if value.is_a? Array
+  end
+  all_paths
+end
