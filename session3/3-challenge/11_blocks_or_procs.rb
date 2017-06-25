@@ -31,25 +31,9 @@
 #   end
 # end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def array_init (n = 5 , &block)
+  block ||= Proc.new { |n| (n * 100).to_s }
+  array = Array.new
+  n.times {|n| array << block.call(n)}
+  array
+end
