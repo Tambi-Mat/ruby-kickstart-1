@@ -26,6 +26,7 @@
 #                      <li style='color:#0000FF;font-family:"Courier New", "Lucida Console"'>football</li>
 #                      </ol>
 
+
 class HTMLTag
   FONTS = {
     :serif      => '"Times New Roman", "Georgia"',
@@ -34,16 +35,20 @@ class HTMLTag
   }
 
   COLORS = {
-    :red => "#FF0000",
-    :green => "#00FF00",
-    :blue => "#0000FF"
+    :red   => '"#FF0000"',
+    :green   => '"#00FF00"',
+    :blue   => '"#0000FF"'
   }
 
-  attr_accessor :name, :innerHTML, :options
+  attr_accessor :name, :innerHTML, :font, :color, :multiline
 
   # options: :multiline should be true or false
-  def initialize(name, innerHTML, options={})
-    @name, @innerHTML, @options = name, innerHTML, options
+  def initialize(name, innerHTML, options = Hash.new)
+    @name, @innerHTML = name, innerHTML
+
+    self.font      = FONTS[options[:font]]
+    self.color     = COLORS[options[:color]]
+    self.multiline = options.fetch :multiline, false
   end
 
   def font
@@ -52,24 +57,25 @@ class HTMLTag
   end
 
   def color
-    color = options[:color]
+    color = options[:color] # one of :red, :green, or :blue
     COLORS[color]
   end
 
   def style
-    if options[:font]
-    return "style='font-family:#{font};color:#{color};'" if options[:color]
-    return "style='font-family:#{font}'"
-    else
-      return "style='color:#{color};'" if options[:color]
-    end
+    return nil unless options[:font] || options[:color]
+      style = "style='"
+      style << "font-family:#{font};" if options[:font]
+      style << "color:#{color};" if options[:color]
+      style << "'"
+      style
   end
 
   def to_s
-    line_end = if options[:multiline] then "\n" else "" end
+    line_end = ""
+    line_end = "\n" if multiline
     "<#{name} #{style}>#{line_end}"  \
     "#{innerHTML.chomp}#{line_end}"  \
     "</#{name}>\n"
   end
-end
 
+end
