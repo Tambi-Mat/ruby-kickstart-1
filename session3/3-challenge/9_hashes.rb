@@ -28,4 +28,9 @@
 # shared [1,2,:c], ['a','b',:c]      # => [{1=>[true, nil], 2=>[true, nil], :c=>[true, true], "a"=>[nil, true], "b"=>[nil, true]}, [:c]]
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
-
+def shared(a, b)
+    hash_ab = Hash.new()
+    a.each {|e| hash_ab[e] = [true,nil]}
+    b.each {|e| hash_ab[e] ? hash_ab[e] = [true,true] : hash_ab[e] = [nil,true]}
+    [hash_ab,hash_ab.select{|key,value| value == [true,true]}.keys.to_a]
+end
