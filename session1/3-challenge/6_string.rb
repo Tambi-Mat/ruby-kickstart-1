@@ -6,5 +6,21 @@
 #
 
 def odds_and_evens(string, return_odds)
+new_string = ""
+	case return_odds
+		when true
+			string.split("").each_with_index do |key, value|
+				if value % 2 != 0
+					 new_string += key
+				end
+			end
+		when false
+			string.split("").each_with_index do |key, value|
+				if value % 2 == 0
+					new_string += key
+				end
+			end
+	end
+	new_string
 
 end
