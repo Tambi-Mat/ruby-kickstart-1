@@ -11,8 +11,14 @@
 
 # <10 books => D, 10..20 books => C, >20 book =>B
 
-
-def grade(num_books, has_read_books)
+def grade(num_books, reads_books)
+  grade_list=["A","B","C","D"]
+  if num_books < 10
+    grade=3;  #Corresponding to D
+  elsif num_books > 20
+    grade=1   #Corresponding to B
+  else
+    grade=2   #Corresponding to C
+  end
+  reads_books ? grade_list[grade-1] : grade_list[grade]
 end
-
-
